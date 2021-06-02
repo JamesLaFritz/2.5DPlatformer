@@ -12,8 +12,10 @@ public class Player : MonoBehaviour
 
     [SerializeField] private bool m_useGravity = true;
     private bool m_isGrounded;
+    private float m_GravityScale = 1f;
 
     [SerializeField] private float m_jumpHeight = 6f;
+    private bool m_hasDoubledJump;
 
     private void Start()
     {
@@ -31,6 +33,7 @@ public class Player : MonoBehaviour
 
         if (m_isGrounded)
         {
+            m_hasDoubledJump = false;
             if (Input.GetButtonDown("Jump"))
             {
                 m_velocity.y = m_jumpHeight;
@@ -38,12 +41,34 @@ public class Player : MonoBehaviour
         }
         else
         {
+            if (!m_hasDoubledJump && Input.GetButtonDown("Jump"))
+            {
+                m_hasDoubledJump = true;
+                m_velocity.y += m_jumpHeight;
+            }
+
             if (m_useGravity)
             {
-                m_velocity += Physics.gravity * Time.deltaTime;
+                m_velocity += Physics.gravity * m_GravityScale * Time.deltaTime;
             }
         }
 
         m_characterController.Move(m_velocity * Time.deltaTime);
+    }
+
+    private void FixedUpdate()
+    {
+        if (m_velocity.y < 0)
+        {
+            m_GravityScale = 2.5f;
+        }
+        else if (m_velocity.y > 0 && !Input.GetButtonDown("Jump"))
+        {
+            m_GravityScale = 2f;
+        }
+        else
+        {
+            m_GravityScale = 1f;
+        }
     }
 }
