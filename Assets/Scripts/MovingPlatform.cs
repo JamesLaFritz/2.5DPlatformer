@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
@@ -9,8 +8,6 @@ public class MovingPlatform : MonoBehaviour
 
     private Vector3 m_targetAPosition, m_targetBPosition, m_targetPosition, m_position;
 
-    [SerializeField, Tag] private string m_playerTag = "Player";
-
     private void Start()
     {
         if (m_targetA == null || m_targetB == null)
@@ -20,7 +17,7 @@ public class MovingPlatform : MonoBehaviour
                 message += "Target A can not be null!\n";
             if (m_targetB == null)
                 message += "Target B can not be null!";
-            Debug.LogException(new NullReferenceException(message));
+            Debug.LogException(new System.NullReferenceException(message));
         }
 
         Debug.Assert(m_targetA != null, nameof(m_targetA) + " != null");
@@ -31,31 +28,14 @@ public class MovingPlatform : MonoBehaviour
 
     private void FixedUpdate()
     {
-        m_position = transform.position;
+        m_position = Vector3.MoveTowards(transform.position, m_targetPosition,
+                                         m_speed * Time.deltaTime);
 
-        transform.position = Vector3.MoveTowards(m_position, m_targetPosition,
-                                                 m_speed * Time.deltaTime);
         if (m_position == m_targetBPosition)
             m_targetPosition = m_targetAPosition;
         else if (m_position == m_targetAPosition)
             m_targetPosition = m_targetBPosition;
-    }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Assert(other != null, nameof(other) + " != null");
-        if (other.CompareTag(m_playerTag))
-        {
-            other.gameObject.transform.SetParent(transform);
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        Debug.Assert(other != null, nameof(other) + " != null");
-        if (other.CompareTag(m_playerTag))
-        {
-            other.gameObject.transform.parent = null;
-        }
+        transform.position = m_position;
     }
 }
