@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerLives
   m_EditorClassIdentifier: 
   variableValue:
-    currentValue: 0
+    currentValue: 2
     maxValue: 3
     valueChanged: {fileID: 11400000, guid: c89d1843c15cc8f42b5d084b4d9c881c, type: 2}
     valueIncreased: {fileID: 0}

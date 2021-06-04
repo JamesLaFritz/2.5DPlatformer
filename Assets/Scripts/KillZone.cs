@@ -21,6 +21,6 @@ public class KillZone : MonoBehaviour
         if (!other.CompareTag(m_PlayerTag)) return;
 
         Debug.Assert(m_playerLives != null, nameof(m_playerLives) + " != null");
-        m_playerLives.Add(-1);
+        m_playerLives.Remove(1);
     }
 }
