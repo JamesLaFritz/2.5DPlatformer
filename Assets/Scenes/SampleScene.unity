@@ -3708,9 +3708,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8b573b09a3c4f34cafe24b7a245aaa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_lightRender: {fileID: 857708617}
-  m_activateColor: {r: 0, g: 1, b: 0, a: 1}
   m_playerTag: Player
+  m_collectableCount:
+    useConstant: 0
+    constantValue: 0
+    variable: {fileID: 11400000, guid: c5cda84498e5cd944a1b5615e70b65e2, type: 2}
+  m_amountNeeded: 8
+  m_activateEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 857708617}
+        m_TargetAssemblyTypeName: UnityEngine.Renderer, UnityEngine
+        m_MethodName: set_material
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2100000, guid: 139b22f535078f743ac4eb52b2bde2d2, type: 2}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_errorEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1987182424
 GameObject:
   m_ObjectHideFlags: 0
