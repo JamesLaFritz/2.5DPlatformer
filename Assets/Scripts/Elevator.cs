@@ -34,20 +34,20 @@ public class Elevator : MonoBehaviour
         }
     }
 
-    public void CallElevator(int floor, int moveDirection)
+    public void CallElevator(int floor)
     {
         if (!m_hasFloors) return;
 
         Debug.Assert(m_floors != null, nameof(m_floors) + " != null");
         m_currentFloor = Mathf.Clamp(floor - 1, 0, m_floors.Length - 1);
-        m_direction = moveDirection;
         SetTargetPosition();
         m_shouldMove = true;
     }
 
-    public void CallElevator(int floor)
+    public void MoveToNextFloor()
     {
-        CallElevator(floor, 1);
+        NextPosition();
+        m_shouldMove = true;
     }
 
 
@@ -91,6 +91,6 @@ public class Elevator : MonoBehaviour
 
         if (m_position != m_targetPosition) return;
 
-        NextPosition();
+        m_shouldMove = false;
     }
 }
