@@ -39,7 +39,7 @@ public class Elevator : MonoBehaviour
         if (!m_hasFloors) return;
 
         Debug.Assert(m_floors != null, nameof(m_floors) + " != null");
-        m_currentFloor = Mathf.Clamp(floor - 1, 0, m_floors.Length - 1);
+        m_currentFloor = Mathf.Clamp(floor, 0, m_floors.Length - 1);
         SetTargetPosition();
         m_shouldMove = true;
     }

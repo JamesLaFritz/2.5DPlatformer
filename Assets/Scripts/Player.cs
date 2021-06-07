@@ -71,6 +71,11 @@ public class Player : MonoBehaviour
         m_characterController.Move(m_velocity * Time.deltaTime);
     }
 
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        
+    }
+
     private void ApplyGravity()
     {
         #region Better Jumping
