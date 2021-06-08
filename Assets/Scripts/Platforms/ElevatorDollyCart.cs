@@ -6,17 +6,7 @@ public class ElevatorDollyCart : CinemachineDollyCart
 {
     [SerializeField] private float m_desiredSpeed;
 
-    public void Call(bool moveDown)
-    {
-        if (moveDown)
-        {
-            m_Speed = m_desiredSpeed * -1;
-        }
-        else
-        {
-            m_Speed = m_desiredSpeed;
-        }
-    }
+    [SerializeField] private int m_numberOfFloors = 4;
 
     public void Call(int floor)
     {
@@ -25,22 +15,16 @@ public class ElevatorDollyCart : CinemachineDollyCart
 
     private IEnumerator MoveToFloor(int floor)
     {
-        yield return null;
+        Debug.Assert(m_Path != null, nameof(m_Path) + " != null");
 
-        float desiredPosition = floor;
+        float desiredPosition = GetSlopePoint(
+            m_Path.MinUnit(m_PositionUnits),
+            m_Path.MaxUnit(m_PositionUnits),
+            1, m_numberOfFloors, floor);
 
-        // switch (m_PositionUnits)
-        // {
-        //     case CinemachinePathBase.PositionUnits.PathUnits:
-        //         desiredPosition = floor;
-        //         break;
-        //     case CinemachinePathBase.PositionUnits.Distance:
-        //         break;
-        //     case CinemachinePathBase.PositionUnits.Normalized:
-        //         break;
-        //     default:
-        //         throw new System.ArgumentOutOfRangeException();
-        // }
+        m_Path.StandardizePathDistance(m_Path.PathLength);
+
+        Debug.Log($"{floor}: {desiredPosition} : {m_Path.FromPathNativeUnits(floor, m_PositionUnits)}");
 
         if (m_Position > desiredPosition)
         {
@@ -48,7 +32,6 @@ public class ElevatorDollyCart : CinemachineDollyCart
 
             while (m_Position > desiredPosition)
             {
-                Debug.Log($"{m_Position} : {desiredPosition}");
                 yield return null;
             }
         }
@@ -57,12 +40,35 @@ public class ElevatorDollyCart : CinemachineDollyCart
             m_Speed = m_desiredSpeed;
             while (m_Position < desiredPosition)
             {
-                Debug.Log($"{m_Position} : {desiredPosition}");
                 yield return null;
             }
         }
 
-        m_Speed = 0;
+
         m_Position = desiredPosition;
+        m_Speed = 0;
+    }
+
+    /// <summary>
+    /// Slope = rise/run = (y2 - y1) / (x2 - x1)
+    /// </summary>
+    private static float GetSlope(float yMin, float yMax, float xMin, float xMax)
+    {
+        float slope = (yMax - yMin) / (xMax - xMin);
+        Debug.Log($"Slope:({yMax} - {yMin}) /  ({xMax} - {xMin}) = {slope}");
+        return (yMax - yMin) / (xMax - xMin);
+    }
+
+    /// <summary>
+    /// y - y1 = m(x - x1)
+    /// SlopPoint - yMin = Slope(x - xMin)
+    /// Slope Point = Slope(x - xMin) + yMin
+    /// </summary>
+    private static float GetSlopePoint(float yMin, float yMax, float xMin, float xMax, float x)
+    {
+        float slope = GetSlope(yMin, yMax, xMin, xMax);
+        float slopePoint = slope * (x - xMin) + yMin;
+        Debug.Log($"Slope Point: {slope} * ({x} - {xMin}) + {yMin} = {slopePoint}");
+        return slopePoint;
     }
 }
