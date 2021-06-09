@@ -37,9 +37,16 @@ public class Player : MonoBehaviour
         // apply the move direction to the velocity
         m_velocity.x = m_moveDirection.x * m_moveSpeed;
 
+        // make the player face the correct direction
+        if (m_moveDirection != Vector3.zero)
+        {
+            transform.forward = m_moveDirection;
+        }
+
         // iF the player is Grounded
         if (m_isGrounded)
         {
+            m_velocity.y = 0;
             // Reset the Double Jump
             m_hasDoubledJump = false;
             // If the Jump Button is pressed
