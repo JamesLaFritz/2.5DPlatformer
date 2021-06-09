@@ -1,12 +1,13 @@
 using System.Collections;
 using Cinemachine;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ElevatorDollyCart : CinemachineDollyCart
 {
     [SerializeField] private float m_desiredSpeed;
 
-    [SerializeField] private int m_numberOfFloors = 4;
+    [SerializeField] private int m_numberOfFloors = 2;
 
     public void Call(int floor)
     {
@@ -17,14 +18,19 @@ public class ElevatorDollyCart : CinemachineDollyCart
     {
         Debug.Assert(m_Path != null, nameof(m_Path) + " != null");
 
-        float desiredPosition = GetSlopePoint(
-            m_Path.MinUnit(m_PositionUnits),
-            m_Path.MaxUnit(m_PositionUnits),
-            1, m_numberOfFloors, floor);
+        float desiredPosition = m_Path.FromPathNativeUnits(floor - 1, m_PositionUnits);
+
+        if (!(m_Path.MaxUnit(CinemachinePathBase.PositionUnits.PathUnits) > 1))
+        {
+            desiredPosition = GetSlopePoint(
+                m_Path.MinUnit(m_PositionUnits),
+                m_Path.MaxUnit(m_PositionUnits),
+                1, m_numberOfFloors, floor);
+        }
 
         m_Path.StandardizePathDistance(m_Path.PathLength);
 
-        Debug.Log($"{floor}: {desiredPosition} : {m_Path.FromPathNativeUnits(floor, m_PositionUnits)}");
+        //Debug.Log($"{floor}: {desiredPosition} : {m_Path.FromPathNativeUnits(floor, m_PositionUnits)}");
 
         if (m_Position > desiredPosition)
         {
