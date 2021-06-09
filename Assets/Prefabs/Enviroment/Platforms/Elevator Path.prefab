@@ -414,12 +414,12 @@ MonoBehaviour:
   m_Appearance:
     pathColor: {r: 0, g: 1, b: 0, a: 1}
     inactivePathColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    width: 0.2
+    width: 0.25
   m_Looped: 0
   m_Waypoints:
   - position: {x: 0, y: 0, z: 0}
     roll: 0
-  - position: {x: 0, y: 1, z: 0}
+  - position: {x: 0, y: 16, z: 0}
     roll: 0
 --- !u!1 &6123795229575150686
 GameObject:
@@ -470,4 +470,5 @@ MonoBehaviour:
   m_PositionUnits: 1
   m_Speed: 0
   m_Position: 0
-  m_desiredSpeed: 0
+  m_desiredSpeed: 5
+  m_numberOfFloors: 4

@@ -20,7 +20,7 @@ public class ElevatorDollyCart : CinemachineDollyCart
 
         float desiredPosition = m_Path.FromPathNativeUnits(floor - 1, m_PositionUnits);
 
-        if (!(m_Path.MaxUnit(CinemachinePathBase.PositionUnits.PathUnits) > 1))
+        if (!(m_Path.MaxUnit(CinemachinePathBase.PositionUnits.PathUnits) > 1) && m_numberOfFloors > 2)
         {
             desiredPosition = GetSlopePoint(
                 m_Path.MinUnit(m_PositionUnits),
@@ -61,7 +61,7 @@ public class ElevatorDollyCart : CinemachineDollyCart
     private static float GetSlope(float yMin, float yMax, float xMin, float xMax)
     {
         float slope = (yMax - yMin) / (xMax - xMin);
-        Debug.Log($"Slope:({yMax} - {yMin}) /  ({xMax} - {xMin}) = {slope}");
+        //Debug.Log($"Slope:({yMax} - {yMin}) /  ({xMax} - {xMin}) = {slope}");
         return (yMax - yMin) / (xMax - xMin);
     }
 
@@ -74,7 +74,7 @@ public class ElevatorDollyCart : CinemachineDollyCart
     {
         float slope = GetSlope(yMin, yMax, xMin, xMax);
         float slopePoint = slope * (x - xMin) + yMin;
-        Debug.Log($"Slope Point: {slope} * ({x} - {xMin}) + {yMin} = {slopePoint}");
+        //Debug.Log($"Slope Point: {slope} * ({x} - {xMin}) + {yMin} = {slopePoint}");
         return slopePoint;
     }
 }
