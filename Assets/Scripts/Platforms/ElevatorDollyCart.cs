@@ -20,15 +20,13 @@ public class ElevatorDollyCart : CinemachineDollyCart
 
         float desiredPosition = m_Path.FromPathNativeUnits(floor - 1, m_PositionUnits);
 
-        if (!(m_Path.MaxUnit(CinemachinePathBase.PositionUnits.PathUnits) > 1) && m_numberOfFloors > 2)
+        if (!(m_Path.MaxUnit(CinemachinePathBase.PositionUnits.PathUnits) > 1))
         {
             desiredPosition = GetSlopePoint(
                 m_Path.MinUnit(m_PositionUnits),
                 m_Path.MaxUnit(m_PositionUnits),
                 1, m_numberOfFloors, floor);
         }
-
-        m_Path.StandardizePathDistance(m_Path.PathLength);
 
         //Debug.Log($"{floor}: {desiredPosition} : {m_Path.FromPathNativeUnits(floor, m_PositionUnits)}");
 
