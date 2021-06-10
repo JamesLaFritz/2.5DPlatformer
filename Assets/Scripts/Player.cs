@@ -48,6 +48,11 @@ public class Player : MonoBehaviour
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
+        OnControllerColliderHitWall(hit);
+    }
+
+    private void OnControllerColliderHitWall(ControllerColliderHit hit)
+    {
         // ReSharper disable PossibleNullReferenceException
         if (!hit.collider.CompareTag(m_wallTag) || m_isGrounded ||
             m_characterController.collisionFlags != CollisionFlags.Sides) return;
