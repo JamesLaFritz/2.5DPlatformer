@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
@@ -37,6 +38,10 @@ public class Player : MonoBehaviour
     private bool m_isContactingWall;
     private bool m_isWallJumping;
 
+    [Header("Pushing")]
+    [Range(0.1f, 10)]
+    [SerializeField] private float m_pushPower = 2;
+
     // ReSharper restore MissingLinebreak
 
     #endregion
@@ -48,6 +53,7 @@ public class Player : MonoBehaviour
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
+        OnControllerColliderPushRigidbody(hit);
         OnControllerColliderHitWall(hit);
     }
 
@@ -68,6 +74,22 @@ public class Player : MonoBehaviour
         m_velocity.y = m_jumpHeight;
         m_moveDirection.x = hit.normal.x;
         m_hasDoubledJump = false;
+    }
+
+    private void OnControllerColliderPushRigidbody(ControllerColliderHit hit)
+    {
+        Rigidbody hitRigidbody = hit.rigidbody;
+        // confirm it has a rigidbody and that the rigidbody can be pushed (the body is not kinematic)
+        if (hitRigidbody == null || hitRigidbody.isKinematic) return;
+
+        // make sure that the box is not below the player
+        if (hit.moveDirection.y < -0.3f) return;
+
+        //calculate move direction
+        Vector3 pushDirection = new Vector3(hit.moveDirection.x, 0, 0);
+        //push (using rigid body velocity
+        float pushPower = m_pushPower / (hitRigidbody.mass > 0 ? hitRigidbody.mass : 0.1f);
+        hitRigidbody.velocity = pushDirection * pushPower;
     }
 
     private void Update()
