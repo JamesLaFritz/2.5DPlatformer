@@ -295,7 +295,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 31406d63b5b79594f8940797ad17d69c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 31406d63b5b79594f8940797ad17d69c, type: 3}
       propertyPath: m_RootOrder
@@ -1763,7 +1763,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 849803230}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.05, y: 27.42, z: -10}
+  m_LocalPosition: {x: -1.9, y: 2.6, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1615020968}
@@ -2074,6 +2074,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 7321118803230977170, guid: 4d883821890faf54ebd9997b46874b19, type: 3}
   m_PrefabInstance: {fileID: 998754671}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &1013379281 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5722130200058319880, guid: 8d01221a4ef73d54b8e5ff96e439a491, type: 3}
+  m_PrefabInstance: {fileID: 2127886608755921411}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1032313896
 PrefabInstance:
@@ -2914,6 +2919,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_activationTag: PressureActivator
   m_radius: 0.1
+  m_activationEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1013379281}
+        m_TargetAssemblyTypeName: UnityEngine.Renderer, UnityEngine
+        m_MethodName: set_material
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2100000, guid: 48df6b7a4406b0b4fa8400dfb6dbb9ad, type: 2}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!4 &1486574101 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4735793777168778, guid: 05a22b6dc2b27b24a9a5342b2c71880b, type: 3}
@@ -3761,7 +3781,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1926266163}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.05, y: 27.42, z: -10}
+  m_LocalPosition: {x: -1.9, y: 2.6, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 244389443}
@@ -4444,6 +4464,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pressure_Pad
       objectReference: {fileID: 0}
+    - target: {fileID: 5722130200058319880, guid: 8d01221a4ef73d54b8e5ff96e439a491, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f005a9a49681e1744b9f46322fd71cc3, type: 2}
     - target: {fileID: 6106433967861282049, guid: 8d01221a4ef73d54b8e5ff96e439a491, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -4582,11 +4606,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 643540053077398581, guid: 774c653c5b3ce9a4292a61a2cd7e59d1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.05
+      value: -1.9
       objectReference: {fileID: 0}
     - target: {fileID: 643540053077398581, guid: 774c653c5b3ce9a4292a61a2cd7e59d1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 26.92
+      value: 2.1
       objectReference: {fileID: 0}
     - target: {fileID: 643540053077398581, guid: 774c653c5b3ce9a4292a61a2cd7e59d1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4623,6 +4647,14 @@ PrefabInstance:
     - target: {fileID: 1257894579080403205, guid: 774c653c5b3ce9a4292a61a2cd7e59d1, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2460869157727092275, guid: 774c653c5b3ce9a4292a61a2cd7e59d1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4395118058150735864, guid: 774c653c5b3ce9a4292a61a2cd7e59d1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 774c653c5b3ce9a4292a61a2cd7e59d1, type: 3}
@@ -4774,11 +4806,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3652204226161903784, guid: 314f55b3ea148ce449a536c7139f1adf, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8932128121282359548, guid: 314f55b3ea148ce449a536c7139f1adf, type: 3}
       propertyPath: m_Name
       value: Movable_Box
+      objectReference: {fileID: 0}
+    - target: {fileID: 8932128121282359548, guid: 314f55b3ea148ce449a536c7139f1adf, type: 3}
+      propertyPath: m_TagString
+      value: PressureActivator
       objectReference: {fileID: 0}
     - target: {fileID: 8932128121282359549, guid: 314f55b3ea148ce449a536c7139f1adf, type: 3}
       propertyPath: m_RootOrder

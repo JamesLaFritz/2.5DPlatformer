@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Collectable
   - Wall
+  - PressureActivator
   layers:
   - Default
   - TransparentFX
