@@ -4,5 +4,5 @@
 Game Elements Include Moving Platforms, Switches, Elevators,  Moveable Objects, Wall Jumping, Double Jumping, and Pressure Pads.
 
 [Itch.io](https://ktmarine1999.itch.io/25d-platformer)
-[Portfolio](https://jameslafritz.intensive.gamedevhq.com/)https://jameslafritz.intensive.gamedevhq.com/
+[Portfolio](https://jameslafritz.intensive.gamedevhq.com/)
 [Articles](https://jameslafritz.intensive.gamedevhq.com/)
